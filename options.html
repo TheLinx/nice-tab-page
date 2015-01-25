@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <div id="header">
+      <h2 data-message="header"></h2>
+      <div class="merged">
+        <img class="merged-main" id="image-preview">
+        <input class="merged-offset" type="file" id="image" accept="image/*">
+        <button class="merged-offset" id="browse-image">...</button>
+      </div>
+      <div class="merged">
+        <span class="merged-offset">Height</span>
+        <input class="merged-main" id="header-height" type="number">
+      </div>
+    </div>
+    <div id="links">
+      <h2 data-message="links"></h2>
+    </div>
+    <button id="addlink" data-message="addlink"></button>
+    <button id="save" data-message="save"></button>
+    <span id="status"></span>
+  </main>
+  <script type="text/javascript" src="i18n.js"></script>
+  <script type="text/javascript" src="settings.js"></script>
+  <script type="text/javascript" src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "extName": {
+    "message": "nice tab page",
+    "description": "Extension name."
+  },
+  "extDesc": {
+    "message": "This is a nice tab page",
+    "description": "Extension description."
+  },
+  "newtab": {
+    "message": "New Tab",
+    "description": "Title field of the new tab."
+  },
+  "header": {
+    "message": "Header",
+    "description": "Referring to the header of the new tab page, used in Options page."
+  },
+  "links": {
+    "message": "Links",
+    "description": "Referring to the links listed on the new tab page, used in Options page."
+  },
+  "addlink": {
+    "message": "Add link",
+    "description": "Adds another link for the list."
+  },
+  "save": {
+    "message": "Save",
+    "description": "Save [the options]."
+  },
+  "saved": {
+    "message": "Options saved!",
+    "description": "Displays when options are saved without any trouble."
+  }
+}

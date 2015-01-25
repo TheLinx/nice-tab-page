@@ -1,0 +1,41 @@
+#image-preview {
+  max-height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.247059);
+  box-shadow: rgba(0, 0, 0, 0.0784314) 0px 1px 0px, rgba(255, 255, 255, 0.74902) 0px 1px 2px inset;
+  margin-right: 2px;
+  border-radius: 2px;
+}
+
+input[type=file] {
+  display: none;
+}
+
+.merged {
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.merged-main {
+  flex: 1;
+}
+
+.merged-offset {
+  background-color: rgba(147,128,108,.1);
+  color: #666;
+  font: inherit;
+  font-weight: 400;
+  border: 1px solid rgba(147,128,108,.25);
+  padding: .5em .75em;
+}
+
+input:not(:first-child) {
+  border-left: 0;
+}
+
+#save {
+  margin-top: 10px;
+}
+
+div > * {
+  max-width: 400px;
+}
