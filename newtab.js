@@ -16,10 +16,8 @@ loadSettings(function(items)
   header.style.height = items.headerheight + 'px';
 
   var container = document.getElementsByTagName('main')[0];
-  for (var i = 0; i < items.links.length; i++)
+  [].forEach.call(items.links, function(link)
   {
-    var link = items.links[i];
-
     var div = document.createElement('div');
     div.style.borderBottomColor = link[2];
     container.appendChild(div);
@@ -30,5 +28,5 @@ loadSettings(function(items)
     anchor.addEventListener('mouseenter', linkMouseEnter);
     anchor.addEventListener('mouseleave', linkMouseLeave);
     div.appendChild(anchor);
-  }
+  });
 });

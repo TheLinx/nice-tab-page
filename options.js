@@ -22,15 +22,16 @@ document.getElementById("save").addEventListener("click", function()
   var headerheight = document.getElementById("header-height").value;
 
   var links = [];
-  var linksContainer = document.getElementById("links");
-  for (var i = 1/*skipping the the h2*/; i < linksContainer.children.length; i++)
+  [].forEach.call(document.getElementById("links").children, function(link)
   {
-    if (linksContainer.children[i].children[0].value.length == 0)
-      continue;
-    if (linksContainer.children[i].children[1].value.length == 0)
-      continue;
-    links.push([linksContainer.children[i].children[0].value, linksContainer.children[i].children[1].value, linksContainer.children[i].children[2].value]);
-  }
+    if (link.tagName == "H2")
+      return;
+    if (link.children[0].value.length == 0)
+      return;
+    if (link.children[1].value.length == 0)
+      return;
+    links.push([link.children[0].value, link.children[1].value, link.children[2].value]);
+  });
 
   chrome.storage.local.set({
     header: header,
@@ -70,10 +71,8 @@ loadSettings(function(items) {
   document.getElementById("header-height").value = items.headerheight;
 
   var container = document.getElementById("links");
-  for (var i = 0; i < items.links.length; i++)
+  [].forEach.call(items.links, function(link)
   {
-    var link = items.links[i];
-
     var div = document.createElement('div');
     div.className = "merged link";
     container.appendChild(div);
@@ -93,5 +92,5 @@ loadSettings(function(items) {
     color.type = 'color';
     color.value = link[2];
     div.appendChild(color);
-  }
+  });
 });
