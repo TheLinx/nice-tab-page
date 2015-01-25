@@ -39,3 +39,22 @@ input:not(:first-child) {
 div > * {
   max-width: 400px;
 }
+
+[draggable]:before {
+  content: "\f05e";
+  font: normal normal normal 16px/1 octicons;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  cursor: move;
+  line-height: 27px;
+  padding-right: 2px;
+}
+[draggable].over {
+  padding-bottom: 27px;
+}
+[draggable].drag {
+  opacity: 0.4;
+}

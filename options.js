@@ -46,24 +46,71 @@ document.getElementById("save").addEventListener("click", function()
   });
 });
 
-document.getElementById("addlink").addEventListener("click", function()
+var dragSource = null;
+function handleDragStart(eve) {
+  dragSource = this;
+  this.classList.add('drag');
+  eve.dataTransfer.effectAllowed = 'move';
+}
+function handleDragOver(eve) {
+  eve.preventDefault();
+  eve.dataTransfer.dropEffect = 'move';
+  return false;
+}
+function handleDragEnter(eve) {
+  this.classList.add('over');
+}
+function handleDragLeave(eve) {
+  this.classList.remove('over');
+}
+function handleDrop(eve) {
+  eve.stopPropagation();
+  if (dragSource != this) {
+    document.getElementById("links").insertBefore(dragSource, this.nextSibling);
+  }
+
+  return false;
+}
+function handleDragEnd(eve) {
+  [].forEach.call(document.querySelectorAll(".link"), function (link) {
+    link.classList.remove('over');
+    link.classList.remove('drag');
+  });
+}
+
+function addlink(name, href, color)
 {
   var div = document.createElement('div');
   div.className = "merged link";
+  div.draggable = true;
+  div.addEventListener("dragstart", handleDragStart);
+  div.addEventListener("dragover",  handleDragOver);
+  div.addEventListener("dragenter", handleDragEnter);
+  div.addEventListener("dragleave", handleDragLeave);
+  div.addEventListener("dragend",   handleDragEnd);
+  div.addEventListener("drop",      handleDrop);
   document.getElementById("links").appendChild(div);
 
-  var name = document.createElement('input');
-  name.type = 'text';
-  div.appendChild(name);
+  var nameinput = document.createElement('input');
+  nameinput.type = 'text';
+  nameinput.value = name;
+  div.appendChild(nameinput);
 
-  var href = document.createElement('input');
-  href.type = 'url';
-  href.className = "merged-main";
-  div.appendChild(href);
+  var hrefinput = document.createElement('input');
+  hrefinput.type = 'url';
+  hrefinput.value = href;
+  hrefinput.className = "merged-main";
+  div.appendChild(hrefinput);
 
-  var color = document.createElement('input');
-  color.type = 'color';
-  div.appendChild(color);
+  var colorinput = document.createElement('input');
+  colorinput.type = 'color';
+  colorinput.value = color;
+  div.appendChild(colorinput);
+}
+
+document.getElementById("addlink").addEventListener("click", function()
+{
+  addlink("", "")
 });
 
 loadSettings(function(items) {
@@ -73,24 +120,6 @@ loadSettings(function(items) {
   var container = document.getElementById("links");
   [].forEach.call(items.links, function(link)
   {
-    var div = document.createElement('div');
-    div.className = "merged link";
-    container.appendChild(div);
-
-    var name = document.createElement('input');
-    name.type = 'text';
-    name.value = link[0];
-    div.appendChild(name);
-
-    var href = document.createElement('input');
-    href.type = 'url';
-    href.value = link[1];
-    href.className = "merged-main";
-    div.appendChild(href);
-
-    var color = document.createElement('input');
-    color.type = 'color';
-    color.value = link[2];
-    div.appendChild(color);
+    addlink(link[0], link[1], link[2]);
   });
 });
