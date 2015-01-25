@@ -5,4 +5,4 @@ This is a nice tab page
 
 # Installing
 
-Get it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/nice-tab-page/mchdgbfpkhhibdaplkgigipjnnngpibd) or download it from the [releases page](releases/latest).
+Get it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/nice-tab-page/mchdgbfpkhhibdaplkgigipjnnngpibd) or download it from the [releases page](https://github.com/TheLinx/nice-tab-page/releases/latest).
