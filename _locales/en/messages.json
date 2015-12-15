@@ -31,6 +31,10 @@
     "message": "Header",
     "description": "Referring to the header of the new tab page, used in Options page."
   },
+  "headerheight": {
+    "message": "Height",
+    "description": "Referring to the height of the header on the new tag page, used in Options page."
+  },
   "links": {
     "message": "Links",
     "description": "Referring to the links listed on the new tab page, used in Options page."
