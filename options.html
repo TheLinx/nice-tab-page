@@ -6,6 +6,12 @@
 </head>
 <body>
   <main>
+    <div id="colors">
+      <h2 data-message="colors"></h2>
+      <div class="merged"><label class="merged-main merged-offset" for="colorbg" data-message="colorbg"></label><input id="colorbg" type="color"></div>
+      <div class="merged"><label class="merged-main merged-offset" for="colorfg" data-message="colorfg"></label><input id="colorfg" type="color"></div>
+      <div class="merged"><label class="merged-main merged-offset" for="colorhi" data-message="colorhi"></label><input id="colorhi" type="color"></div>
+    </div>
     <div id="header">
       <h2 data-message="header"></h2>
       <div class="merged">
@@ -14,7 +20,7 @@
         <button class="merged-offset" id="browse-image">...</button>
       </div>
       <div class="merged">
-        <span class="merged-offset">Height</span>
+        <label class="merged-offset" for="header-height">Height</label>
         <input class="merged-main" id="header-height" type="number">
       </div>
     </div>

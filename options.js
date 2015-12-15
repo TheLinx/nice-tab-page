@@ -20,6 +20,10 @@ document.getElementById("save").addEventListener("click", function()
 {
   var header = document.getElementById("image-preview").src;
   var headerheight = document.getElementById("header-height").value;
+  
+  var colorbg = document.getElementById("colorbg").value;
+  var colorfg = document.getElementById("colorfg").value;
+  var colorhi = document.getElementById("colorhi").value;
 
   var links = [];
   [].forEach.call(document.getElementById("links").children, function(link)
@@ -36,7 +40,10 @@ document.getElementById("save").addEventListener("click", function()
   chrome.storage.local.set({
     header: header,
     headerheight: headerheight,
-    links: links
+    links: links,
+    colorbg,
+    colorfg,
+    colorhi
   }, function() {
     var status = document.getElementById('status');
     status.textContent = chrome.i18n.getMessage('saved');
@@ -116,7 +123,11 @@ document.getElementById("addlink").addEventListener("click", function()
 loadSettings(function(items) {
   document.getElementById("image-preview").src = items.header;
   document.getElementById("header-height").value = items.headerheight;
-
+  
+  document.getElementById("colorbg").value = items.colorbg;
+  document.getElementById("colorfg").value = items.colorfg;
+  document.getElementById("colorhi").value = items.colorhi;
+  
   var container = document.getElementById("links");
   [].forEach.call(items.links, function(link)
   {

@@ -28,8 +28,16 @@ input[type=file] {
   padding: .5em .75em;
 }
 
-input:not(:first-child) {
-  border-left: 0;
+.merged-offset:not(:last-child) {
+  border-right: 0;
+}
+
+input:not(:last-child) {
+  border-right: 0;
+}
+
+input[type=color] {
+  padding: .2em .3em;
 }
 
 #save {
@@ -51,6 +59,10 @@ div > * {
   cursor: move;
   line-height: 27px;
   padding-right: 2px;
+  background-color: rgba(147,128,108,.1);
+  border: 1px solid rgba(147,128,108,.25);
+  padding: 0 .75em;
+  border-right: 0;
 }
 [draggable].over {
   padding-bottom: 27px;

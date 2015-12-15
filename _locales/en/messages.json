@@ -11,6 +11,22 @@
     "message": "New Tab",
     "description": "Title field of the new tab."
   },
+  "colors": {
+    "message": "Colors",
+    "description": "Referring to the colors of the new tab page, used in Options page."
+  },
+  "colorbg": {
+    "message": "Background",
+    "description": "The background color on the new tab page"
+  },
+  "colorfg": {
+    "message": "Foreground",
+    "description": "The foreground color on the new tab page"
+  },
+  "colorhi": {
+    "message": "Highlights",
+    "desciption": "The highlight color on the new tab page"
+  },
   "header": {
     "message": "Header",
     "description": "Referring to the header of the new tab page, used in Options page."
