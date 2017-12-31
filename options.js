@@ -55,8 +55,8 @@ document.getElementById("save").addEventListener("click", function()
 
 var dragSource = null;
 function handleDragStart(eve) {
-  dragSource = this;
-  this.classList.add('drag');
+  dragSource = this.parentElement;
+  dragSource.classList.add('drag');
   eve.dataTransfer.effectAllowed = 'move';
 }
 function handleDragOver(eve) {
@@ -65,15 +65,15 @@ function handleDragOver(eve) {
   return false;
 }
 function handleDragEnter(eve) {
-  this.classList.add('over');
+  this.parentElement.classList.add('over');
 }
 function handleDragLeave(eve) {
-  this.classList.remove('over');
+  this.parentElement.classList.remove('over');
 }
 function handleDrop(eve) {
   eve.stopPropagation();
-  if (dragSource != this) {
-    document.getElementById("links").insertBefore(dragSource, this.nextSibling);
+  if (dragSource != this.parentElement) {
+    document.getElementById("links").insertBefore(dragSource, this.parentElement.nextSibling);
   }
 
   return false;
@@ -89,14 +89,17 @@ function addlink(name, href, color)
 {
   var div = document.createElement('div');
   div.className = "merged link";
-  div.draggable = true;
-  div.addEventListener("dragstart", handleDragStart);
-  div.addEventListener("dragover",  handleDragOver);
-  div.addEventListener("dragenter", handleDragEnter);
-  div.addEventListener("dragleave", handleDragLeave);
-  div.addEventListener("dragend",   handleDragEnd);
-  div.addEventListener("drop",      handleDrop);
   document.getElementById("links").appendChild(div);
+
+  var dragbox = document.createElement('div');
+  dragbox.draggable = true;
+  dragbox.addEventListener("dragstart", handleDragStart);
+  dragbox.addEventListener("dragover",  handleDragOver);
+  dragbox.addEventListener("dragenter", handleDragEnter);
+  dragbox.addEventListener("dragleave", handleDragLeave);
+  dragbox.addEventListener("dragend",   handleDragEnd);
+  dragbox.addEventListener("drop",      handleDrop);
+  div.appendChild(dragbox);
 
   var nameinput = document.createElement('input');
   nameinput.type = 'text';
