@@ -16,7 +16,7 @@ header {
 main {
   flex: 1 0 auto;
   max-width: 768px;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
 }
 
 div {
@@ -24,9 +24,7 @@ div {
   height: 170px;
   float: left;
   text-align: center;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-top: 15px;
+  margin: 0 5px 15px 5px;
   border-bottom: 4px solid;
 
   /* background: #dedada; */
