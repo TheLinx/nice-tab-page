@@ -30,11 +30,11 @@ document.getElementById("save").addEventListener("click", function()
   {
     if (link.tagName == "H2")
       return;
-    if (link.children[0].value.length == 0)
-      return;
     if (link.children[1].value.length == 0)
       return;
-    links.push([link.children[0].value, link.children[1].value, link.children[2].value]);
+    if (link.children[2].value.length == 0)
+      return;
+    links.push([link.children[1].value, link.children[2].value, link.children[3].value]);
   });
 
   chrome.storage.local.set({
