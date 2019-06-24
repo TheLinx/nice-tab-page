@@ -50,5 +50,13 @@
   "saved": {
     "message": "Options saved!",
     "description": "Displays when options are saved without any trouble."
+  },
+  "import": {
+    "message": "Import",
+    "description": "Button to import settings saved to a file"
+  },
+  "export": {
+    "message": "Export",
+    "description": "Button to export settings to a file"
   }
 }

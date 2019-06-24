@@ -16,8 +16,7 @@ document.getElementById("image").addEventListener("change", function(eve)
   reader.readAsDataURL(file);
 });
 
-document.getElementById("save").addEventListener("click", function()
-{
+function getSettingsFromDOM() {
   var header = document.getElementById("image-preview").src;
   var headerheight = document.getElementById("header-height").value;
   
@@ -37,19 +36,46 @@ document.getElementById("save").addEventListener("click", function()
     links.push([link.children[1].value, link.children[2].value, link.children[3].value]);
   });
 
-  chrome.storage.local.set({
-    header: header,
-    headerheight: headerheight,
-    links: links,
+  return {
+    header,
+    headerheight,
+    links,
     colorbg,
     colorfg,
     colorhi
-  }, function() {
-    var status = document.getElementById('status');
-    status.textContent = chrome.i18n.getMessage('saved');
-    setTimeout(function() {
-      status.textContent = '';
-    }, 750);
+  };
+}
+
+function setSettingsInDOM(items) {
+  document.getElementById("image-preview").src = items.header;
+  document.getElementById("header-height").value = items.headerheight;
+  
+  document.getElementById("colorbg").value = items.colorbg;
+  document.getElementById("colorfg").value = items.colorfg;
+  document.getElementById("colorhi").value = items.colorhi;
+  
+  var container = document.getElementById("links");
+  while (container.lastChild.tagName !== "H2") {
+    container.removeChild(container.lastChild);
+  }
+  [].forEach.call(items.links, function(link)
+  {
+    addlink(link[0], link[1], link[2]);
+  });
+}
+
+function displayStatus(message, timeout) {
+  var status = document.getElementById('status');
+  status.textContent = message;
+  setTimeout(function() {
+    status.textContent = '';
+  }, timeout || 750);
+}
+
+document.getElementById("save").addEventListener("click", function()
+{
+  chrome.storage.local.set(getSettingsFromDOM(), function() {
+    displayStatus(chrome.i18n.getMessage('saved'));
   });
 });
 
@@ -123,17 +149,40 @@ document.getElementById("addlink").addEventListener("click", function()
   addlink("", "")
 });
 
-loadSettings(function(items) {
-  document.getElementById("image-preview").src = items.header;
-  document.getElementById("header-height").value = items.headerheight;
-  
-  document.getElementById("colorbg").value = items.colorbg;
-  document.getElementById("colorfg").value = items.colorfg;
-  document.getElementById("colorhi").value = items.colorhi;
-  
-  var container = document.getElementById("links");
-  [].forEach.call(items.links, function(link)
-  {
-    addlink(link[0], link[1], link[2]);
-  });
+document.getElementById("import").addEventListener("change", function(e)
+{
+  if (e.target.files !== null && e.target.files[0] !== null) {
+    var reader = new FileReader();
+    reader.onload = function (reEvt) {
+      try {
+        var imported = JSON.parse(reEvt.target.result);
+        var desiredKeys = ["header", "headerheight", "colorbg", "colorfg", "colorhi", "links"];
+        desiredKeys.forEach(function (key) {
+          if (imported[key] === undefined) {
+            throw new Error("Missing key " + key);
+          }
+        });
+        setSettingsInDOM(imported);
+        document.getElementById("save").click();
+      } catch (er) {
+        displayStatus(er.message, 2000);
+      }
+    }
+    reader.readAsText(e.target.files[0])
+    e.target.value = ""; // reset the file input
+  }
 });
+
+document.getElementById("export").addEventListener("click", function()
+{
+  var toExport = getSettingsFromDOM();
+  var data = JSON.stringify(toExport);
+  var blob = new Blob([data], {type: 'text/json'});
+  var a = document.createElement("a");
+  a.download = "nice tab page settings.json";
+  a.href = URL.createObjectURL(blob);
+  setTimeout(function () { URL.revokeObjectURL(a.href) }, 4E4);
+  setTimeout(function () { a.click() }, 0);
+});
+
+loadSettings(setSettingsInDOM);

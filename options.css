@@ -70,3 +70,7 @@ div > * {
 .drag {
   opacity: 0.4;
 }
+
+input.hidden {
+  display: none;
+}
